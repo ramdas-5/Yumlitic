@@ -1,23 +1,20 @@
 {
   "installCommand": "pnpm install",
+  "buildCommand": "npm run build",
   "builds": [
     {
-      "src": "server/index.ts",
+      "src": "dist/server/node-build.mjs",
       "use": "@vercel/node"
     },
     {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist",
-        "buildCommand": "npm run build:client"
-      }
+      "src": "dist/spa/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "server/index.ts"
+      "dest": "dist/server/node-build.mjs"
     },
     {
       "handle": "filesystem"
