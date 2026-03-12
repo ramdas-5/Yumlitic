@@ -1,20 +1,23 @@
 {
   "installCommand": "pnpm install",
-  "buildCommand": "npm run build",
   "builds": [
     {
-      "src": "dist/server/node-build.mjs",
+      "src": "server/index.ts",          // ← CHANGE to your actual server source path
       "use": "@vercel/node"
     },
     {
-      "src": "dist/spa/**",
-      "use": "@vercel/static"
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist/spa",
+        "buildCommand": "npm run build:client"
+      }
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "dist/server/node-build.mjs"
+      "dest": "server/index.ts"           // ← same path as above
     },
     {
       "handle": "filesystem"
