@@ -2,7 +2,7 @@
   "installCommand": "pnpm install",
   "builds": [
     {
-      "src": "server/index.ts",          // ← CHANGE to your actual server source path
+      "src": "server/index.ts",          
       "use": "@vercel/node"
     },
     {
@@ -17,7 +17,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "server/index.ts"           // ← same path as above
+      "dest": "server/index.ts"          
     },
     {
       "handle": "filesystem"
